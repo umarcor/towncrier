@@ -152,13 +152,12 @@ def __main(
     The main entry point.
     """
     base_directory, config = load_config_from_options(directory, config_file)
-    to_err = draft
 
-    click.echo("Loading template...", err=to_err)
+    click.echo("Loading template...")
     with open(config.template, "rb") as tmpl:
         template = tmpl.read().decode("utf8")
 
-    click.echo("Finding news fragments...", err=to_err)
+    click.echo("Finding news fragments...")
 
     if config.directory is not None:
         fragment_base_directory = os.path.abspath(config.directory)
@@ -177,7 +176,7 @@ def __main(
         config.orphan_prefix,
     )
 
-    click.echo("Rendering news fragments...", err=to_err)
+    click.echo("Rendering news fragments...")
     fragments = split_fragments(
         fragment_contents, config.types, all_bullets=config.all_bullets
     )
@@ -250,13 +249,12 @@ def __main(
     if draft and filename is None:
         click.echo(
             "Print draft to stdout only -- nothing has been written.\n"
-            "What is seen below is what would be written.\n",
-            err=to_err,
+            "What is seen below is what would be written.\n"
         )
         click.echo(content)
         return
 
-    click.echo("Writing to newsfile...", err=to_err)
+    click.echo("Writing to newsfile...")
 
     if filename is None:
         filename = config.filename
@@ -282,7 +280,7 @@ def __main(
     )
 
     if not draft:
-        click.echo("Staging newsfile...", err=to_err)
+        click.echo("Staging newsfile...")
         _git.stage_newsfile(base_directory, filename)
 
         if should_remove_fragment_files(
@@ -290,10 +288,10 @@ def __main(
             answer_yes,
             answer_keep,
         ):
-            click.echo("Removing news fragments...", err=to_err)
+            click.echo("Removing news fragments...")
             _git.remove_files(fragment_filenames)
 
-    click.echo("Done!", err=to_err)
+    click.echo("Done!")
 
 
 def should_remove_fragment_files(
