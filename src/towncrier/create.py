@@ -92,8 +92,7 @@ def __main(
             ),
         )
     if len(filename.split(".")) < 2 or (
-        filename.split(".")[-1] not in config.types
-        and filename.split(".")[-2] not in config.types
+        filename.split(".")[-1] not in config.types and filename.split(".")[-2] not in config.types
     ):
         raise click.BadParameter(
             "Expected filename '{}' to be of format '{{name}}.{{type}}', "
@@ -102,9 +101,7 @@ def __main(
         )
 
     if config.directory:
-        fragments_directory = os.path.abspath(
-            os.path.join(base_directory, config.directory)
-        )
+        fragments_directory = os.path.abspath(os.path.join(base_directory, config.directory))
     else:
         fragments_directory = os.path.abspath(
             os.path.join(
@@ -127,9 +124,7 @@ def __main(
         extra_ext = ""
     while os.path.exists(segment_file):
         retry += 1
-        segment_file = os.path.join(
-            fragments_directory, f"{filename}.{retry}{extra_ext}"
-        )
+        segment_file = os.path.join(fragments_directory, f"{filename}.{retry}{extra_ext}")
 
     if edit:
         edited_content = _get_news_content_from_user(content)
@@ -144,7 +139,9 @@ def __main(
     click.echo(f"Created news fragment at {segment_file}")
 
 
-def _get_news_content_from_user(message: str) -> str | None:
+def _get_news_content_from_user(
+    message: str,
+) -> str | None:
     initial_content = (
         "# Please write your news content. When finished, save the file.\n"
         "# In order to abort, exit without saving.\n"

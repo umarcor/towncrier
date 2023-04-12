@@ -19,7 +19,9 @@ from .helpers import setup_simple_project, with_isolated_runner, write
 
 
 def create_project(
-    pyproject_path="pyproject.toml", main_branch="main", extra_config=""
+    pyproject_path="pyproject.toml",
+    main_branch="main",
+    extra_config="",
 ):
     """
     Create the project files in the main branch that already has a
@@ -31,7 +33,9 @@ def create_project(
     call(["git", "checkout", "-b", "otherbranch"])
 
 
-def commit(message):
+def commit(
+    message,
+):
     """Stage and commit the repo in the current working directory
 
     There must be uncommitted changes otherwise git will complain:
@@ -41,7 +45,9 @@ def commit(message):
     call(["git", "commit", "-m", message])
 
 
-def initial_commit(branch="main"):
+def initial_commit(
+    branch="main",
+):
     """
     Create a git repo, configure it and make an initial commit
 
@@ -83,9 +89,7 @@ class TestChecker(TestCase):
         pyproject = "not-pyproject.toml"
         self._test_no_changes_made(
             pyproject,
-            lambda runner, main, argv: runner.invoke(
-                main, argv + ["--config", pyproject]
-            ),
+            lambda runner, main, argv: runner.invoke(main, argv + ["--config", pyproject]),
         )
 
     def _test_no_changes_made(self, pyproject_path, invoke):
@@ -162,9 +166,7 @@ class TestChecker(TestCase):
             result = runner.invoke(towncrier_check, ["--compare-with", "master"])
 
             self.assertEqual(1, result.exit_code)
-            self.assertTrue(
-                result.output.endswith("No new newsfragments found on this branch.\n")
-            )
+            self.assertTrue(result.output.endswith("No new newsfragments found on this branch.\n"))
 
     def test_none_stdout_encoding_works(self):
         """

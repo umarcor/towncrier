@@ -240,9 +240,7 @@ Misc
             }
         }
 
-        definitions = OrderedDict(
-            [("feature", {"name": "Features", "showcontent": True})]
-        )
+        definitions = OrderedDict([("feature", {"name": "Features", "showcontent": True})])
 
         expected_output = """MyProject 1.0 (never)
 =====================
@@ -295,9 +293,7 @@ Features
             }
         }
 
-        definitions = OrderedDict(
-            [("feature", {"name": "Features", "showcontent": True})]
-        )
+        definitions = OrderedDict([("feature", {"name": "Features", "showcontent": True})])
 
         expected_output = """MyProject 1.0 (never)
 =====================

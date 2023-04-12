@@ -201,9 +201,7 @@ orphan_prefix = "~"
         with self.assertRaises(ConfigError) as e:
             load_config(temp)
 
-        self.assertEqual(
-            str(e.exception), "Towncrier does not have a template named 'foo'."
-        )
+        self.assertEqual(str(e.exception), "Towncrier does not have a template named 'foo'.")
 
     def test_custom_types_as_tables_array_deprecated(self):
         """

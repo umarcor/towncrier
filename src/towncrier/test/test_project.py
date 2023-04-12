@@ -91,9 +91,7 @@ class VersionFetchingTests(TestCase):
         with self.assertRaises(Exception) as e:
             get_version(tmp_dir, "missing")
 
-        self.assertEqual(
-            ("No __version__, I don't know how else to look",), e.exception.args
-        )
+        self.assertEqual(("No __version__, I don't know how else to look",), e.exception.args)
 
     def test_missing_version_project_name(self):
         """

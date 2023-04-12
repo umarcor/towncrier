@@ -112,9 +112,7 @@ def find_fragments(
         file_content = {}
 
         for basename in files:
-            ticket, category, counter = parse_newfragment_basename(
-                basename, frag_type_names
-            )
+            ticket, category, counter = parse_newfragment_basename(basename, frag_type_names)
             if category is None:
                 continue
             assert ticket is not None
@@ -132,9 +130,7 @@ def find_fragments(
 
             if (ticket, category, counter) in file_content:
                 raise ValueError(
-                    "multiple files for {}.{} in {}".format(
-                        ticket, category, section_dir
-                    )
+                    "multiple files for {}.{} in {}".format(ticket, category, section_dir)
                 )
             file_content[ticket, category, counter] = data
 

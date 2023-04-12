@@ -111,6 +111,7 @@ exclude = [
 
 
 [tool.black]
+line-length = 100
 exclude = '''
 
 (
@@ -133,8 +134,7 @@ exclude = '''
 
 [tool.isort]
 profile = "attrs"
-line_length = 88
-
+line_length = 100
 
 [tool.mypy]
 strict = true

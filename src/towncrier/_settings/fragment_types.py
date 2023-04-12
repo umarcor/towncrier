@@ -120,8 +120,7 @@ class TableFragmentTypesLoader(BaseFragmentTypesLoader):
         fragment_types: Iterable[str] = self.fragment_options.keys()
         fragment_types = sorted(fragment_types)
         custom_types_sequence = [
-            (fragment_type, self._load_options(fragment_type))
-            for fragment_type in fragment_types
+            (fragment_type, self._load_options(fragment_type)) for fragment_type in fragment_types
         ]
         types = clt.OrderedDict(custom_types_sequence)
         return types

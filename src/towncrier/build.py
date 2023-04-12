@@ -170,7 +170,9 @@ def __main(
 
     click.echo("Rendering news fragments...", err=to_err)
     fragments = split_fragments(
-        fragment_contents, config.types, all_bullets=config.all_bullets
+        fragment_contents,
+        config.types,
+        all_bullets=config.all_bullets,
     )
 
     if project_version is None:

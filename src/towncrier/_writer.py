@@ -30,9 +30,7 @@ def append_to_newsfile(
     """
     news_file = Path(directory) / filename
 
-    header, prev_body = _figure_out_existing_content(
-        news_file, start_string, single_file
-    )
+    header, prev_body = _figure_out_existing_content(news_file, start_string, single_file)
 
     if top_line and top_line in prev_body:
         raise ValueError("It seems you've already produced newsfiles for this version?")
@@ -51,7 +49,9 @@ def append_to_newsfile(
 
 
 def _figure_out_existing_content(
-    news_file: Path, start_string: str, single_file: bool
+    news_file: Path,
+    start_string: str,
+    single_file: bool,
 ) -> tuple[str, str]:
     """
     Try to read *news_file* and split it into header (everything before

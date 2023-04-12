@@ -137,9 +137,7 @@ class TestCli(TestCase):
         )
 
         # There's only pyproject.toml in this directory.
-        self.assertEqual(
-            [Path(td.name) / "pyproject.toml"], list(Path(td.name).glob("*"))
-        )
+        self.assertEqual([Path(td.name) / "pyproject.toml"], list(Path(td.name).glob("*")))
         self.assertEqual(0, result.exit_code)
         self.assertTrue((project_dir / "NEWS.rst").exists())
 
@@ -622,9 +620,7 @@ class TestCli(TestCase):
             with open("newsfragments/123.feature", "w") as f:
                 f.write("Adds levitation")
 
-            result = runner.invoke(
-                _main, ["--version", "7.8.9", "--date", "01-01-2001", "--draft"]
-            )
+            result = runner.invoke(_main, ["--version", "7.8.9", "--date", "01-01-2001", "--draft"])
 
         self.assertEqual(0, result.exit_code, result.output)
         self.assertEqual(
@@ -667,9 +663,7 @@ class TestCli(TestCase):
             with open("newsfragments/123.feature", "w") as f:
                 f.write("Adds levitation")
 
-            result = runner.invoke(
-                _main, ["--version", "7.8.9", "--date", "01-01-2001", "--draft"]
-            )
+            result = runner.invoke(_main, ["--version", "7.8.9", "--date", "01-01-2001", "--draft"])
 
         self.assertEqual(0, result.exit_code, result.output)
         self.assertEqual(
@@ -735,9 +729,7 @@ class TestCli(TestCase):
                     )
                 )
             os.mkdir("newsfragments")
-            results.append(
-                do_build_once_with("7.8.9", "123.feature", "Adds levitation")
-            )
+            results.append(do_build_once_with("7.8.9", "123.feature", "Adds levitation"))
             results.append(do_build_once_with("7.9.0", "456.bugfix", "Adds catapult"))
 
             self.assertEqual(0, results[0].exit_code, results[0].output)
@@ -847,9 +839,7 @@ class TestCli(TestCase):
                     )
                 )
             os.mkdir("newsfragments")
-            results.append(
-                do_build_once_with("7.8.9", "123.feature", "Adds levitation")
-            )
+            results.append(do_build_once_with("7.8.9", "123.feature", "Adds levitation"))
             results.append(do_build_once_with("7.9.0", "456.bugfix", "Adds catapult"))
 
             self.assertEqual(0, results[0].exit_code, results[0].output)

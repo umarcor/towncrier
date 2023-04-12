@@ -18,7 +18,9 @@ from ._git import get_remote_branches, list_changed_files_compared_to_branch
 from ._settings import config_option_help, load_config_from_options
 
 
-def _get_default_compare_branch(branches: Container[str]) -> str | None:
+def _get_default_compare_branch(
+    branches: Container[str],
+) -> str | None:
     if "origin/main" in branches:
         return "origin/main"
     if "origin/master" in branches:
@@ -65,7 +67,9 @@ def _main(compare_with: str | None, directory: str | None, config: str | None) -
 
 
 def __main(
-    comparewith: str | None, directory: str | None, config_path: str | None
+    comparewith: str | None,
+    directory: str | None,
+    config_path: str | None,
 ) -> None:
     base_directory, config = load_config_from_options(directory, config_path)
 
@@ -79,23 +83,17 @@ def __main(
         sys.exit(1)
 
     try:
-        files_changed = list_changed_files_compared_to_branch(
-            base_directory, comparewith
-        )
+        files_changed = list_changed_files_compared_to_branch(base_directory, comparewith)
     except CalledProcessError as e:
         click.echo("git produced output while failing:")
         click.echo(e.output)
         raise
 
     if not files_changed:
-        click.echo(
-            f"On {comparewith} branch, or no diffs, so no newsfragment required."
-        )
+        click.echo(f"On {comparewith} branch, or no diffs, so no newsfragment required.")
         sys.exit(0)
 
-    files = {
-        os.path.normpath(os.path.join(base_directory, path)) for path in files_changed
-    }
+    files = {os.path.normpath(os.path.join(base_directory, path)) for path in files_changed}
 
     click.echo("Looking at these files:")
     click.echo("----")

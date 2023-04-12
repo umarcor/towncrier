@@ -69,7 +69,8 @@ _underlines = ["=", "-", "~"]
 
 
 def load_config_from_options(
-    directory: str | None, config_path: str | None
+    directory: str | None,
+    config_path: str | None,
 ) -> tuple[str, Config]:
     if config_path is None:
         if directory is None:
@@ -91,7 +92,9 @@ def load_config_from_options(
     return base_directory, config
 
 
-def load_config(directory: str) -> Config | None:
+def load_config(
+    directory: str,
+) -> Config | None:
     towncrier_toml = os.path.join(directory, "towncrier.toml")
     pyproject_toml = os.path.join(directory, "pyproject.toml")
 
@@ -105,7 +108,10 @@ def load_config(directory: str) -> Config | None:
     return load_config_from_file(directory, config_file)
 
 
-def load_config_from_file(directory: str, config_file: str) -> Config:
+def load_config_from_file(
+    directory: str,
+    config_file: str,
+) -> Config:
     with open(config_file, "rb") as conffile:
         config = tomllib.load(conffile)
 
@@ -117,7 +123,10 @@ _file_manager = ExitStack()
 atexit.register(_file_manager.close)
 
 
-def parse_toml(base_path: str, config: Mapping[str, Any]) -> Config:
+def parse_toml(
+    base_path: str,
+    config: Mapping[str, Any],
+) -> Config:
     if "tool" not in config:
         raise ConfigError("No [tool.towncrier] section.", failing_option="all")
 

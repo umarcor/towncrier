@@ -18,9 +18,7 @@ from .helpers import setup_simple_project, with_isolated_runner
 class TestCli(TestCase):
     maxDiff = None
 
-    def _test_success(
-        self, content=None, config=None, mkdir=True, additional_args=None
-    ):
+    def _test_success(self, content=None, config=None, mkdir=True, additional_args=None):
         runner = CliRunner()
 
         with runner.isolated_filesystem():
@@ -102,9 +100,7 @@ class TestCli(TestCase):
         edit_content = ["This is line 1\n", "This is line 2"]
         with mock.patch("click.edit") as mock_edit:
             mock_edit.return_value = "".join(edit_content)
-            self._test_success(
-                content=edit_content, additional_args=["-c", content_line, "--edit"]
-            )
+            self._test_success(content=edit_content, additional_args=["-c", content_line, "--edit"])
             mock_edit.assert_called_once_with(
                 "# Please write your news content. When finished, save the file.\n"
                 "# In order to abort, exit without saving.\n"
@@ -147,9 +143,7 @@ class TestCli(TestCase):
             self.assertEqual([], os.listdir("foo/newsfragments"))
 
         self.assertEqual(type(result.exception), SystemExit, result.exception)
-        self.assertIn(
-            "Expected filename '123.foobar.rst' to be of format", result.output
-        )
+        self.assertIn("Expected filename '123.foobar.rst' to be of format", result.output)
 
     @with_isolated_runner
     def test_file_exists(self, runner: CliRunner):
