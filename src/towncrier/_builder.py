@@ -6,7 +6,7 @@ from __future__ import annotations
 
 import os
 import textwrap
-import traceback
+from traceback import format_exception_only
 
 from collections import OrderedDict, defaultdict
 from typing import Any, DefaultDict, Iterable, Iterator, Mapping, Sequence
@@ -104,9 +104,7 @@ def find_fragments(
         try:
             files = os.listdir(section_dir)
         except FileNotFoundError as e:
-            message = "Failed to list the news fragment files.\n{}".format(
-                "".join(traceback.format_exception_only(type(e), e)),
-            )
+            message = f"Failed to list the news fragment files.\n{''.join(format_exception_only(type(e), e))}"
             raise ConfigError(message)
 
         file_content = {}
@@ -129,9 +127,7 @@ def find_fragments(
                 data = f.read().decode("utf8", "replace")
 
             if (ticket, category, counter) in file_content:
-                raise ValueError(
-                    "multiple files for {}.{} in {}".format(ticket, category, section_dir)
-                )
+                raise ValueError(f"multiple files for {ticket}.{category} in {section_dir}")
             file_content[ticket, category, counter] = data
 
         content[key] = file_content
